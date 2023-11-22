@@ -63,7 +63,6 @@ abstract class SerializableRecordValue
       _$serializableRecordValueSerializer;
 
   int get value;
-  @BuiltValueField(serialize: false)
   (int, int)? get record;
 
   factory SerializableRecordValue(

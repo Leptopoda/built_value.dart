@@ -27,7 +27,14 @@ class _$SerializableRecordValueSerializer
       'value',
       serializers.serialize(object.value, specifiedType: const FullType(int)),
     ];
-
+    Object? value;
+    value = object.record;
+    if (value != null) {
+      result
+        ..add('record')
+        ..add(serializers.serialize(value,
+            specifiedType: FullType((int, int).runtimeType)));
+    }
     return result;
   }
 
@@ -46,6 +53,10 @@ class _$SerializableRecordValueSerializer
         case 'value':
           result.value = serializers.deserialize(value,
               specifiedType: const FullType(int))! as int;
+          break;
+        case 'record':
+          result.record = serializers.deserialize(value,
+              specifiedType: FullType((int, int).runtimeType)) as (int, int)?;
           break;
       }
     }
